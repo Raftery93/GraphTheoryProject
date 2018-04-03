@@ -1,7 +1,8 @@
 //Author: Conor Raftery
 //Adapted from: https://web.microsoftstream.com/video/68a288f5-4688-4b3a-980e-1fcd5dd2a53b
+//Adapted from: https://web.microsoftstream.com/video/68a288f5-4688-4b3a-980e-1fcd5dd2a53b
 
-package main
+package assets
 
 import (
 	"fmt"
@@ -18,7 +19,7 @@ type nfa struct {
 	accept  *state
 }
 
-func poregtonfa(pofix string) *nfa {
+func Poregtonfa(pofix string) *nfa {
 	nfastack := []*nfa{}
 
 	for _, r := range pofix {
@@ -65,11 +66,50 @@ func poregtonfa(pofix string) *nfa {
 		}
 	}
 
+	if len(nfastack) != 1 {
+		fmt.Println("Uh oh, there was ", len(nfastack), " NFA's found, they are: ", nfastack)
+	}
+
 	return nfastack[0]
 }
 
-func main() {
+func addState(l []*state, s *state, a *state) []*state {
+	l = append(l, s)
 
-	nfa := poregtonfa("ab.c*|")
-	fmt.Println(nfa)
-} //main
+	if s != a && s.symbol == 0 {
+		l = addState(l, s.edge1, a)
+		if s.edge2 != nil {
+			l = addState(l, s.edge2, a)
+		}
+	}
+
+	return l
+}
+
+func Pomatch(po string, s string) bool {
+	ismatch := false
+	ponfa := Poregtonfa(po)
+
+	current := []*state{}
+	next := []*state{}
+
+	current = addState(current[:], ponfa.initial, ponfa.accept)
+
+	for _, r := range s {
+		for _, c := range current {
+			if c.symbol == r {
+				next = addState(next[:], c.edge1, ponfa.accept)
+			}
+		}
+		current, next = next, []*state{}
+	}
+
+	for _, c := range current {
+		if c == ponfa.accept {
+			ismatch = true
+			break
+		}
+	}
+
+	return ismatch
+}

@@ -1,13 +1,9 @@
 //Author: Conor Raftery
 //Adapted from: https://web.microsoftstream.com/video/9d83a3f3-bc4f-4bda-95cc-b21c8e67675e
 
-package main
+package assets
 
-import (
-	"fmt"
-)
-
-func intopost(infix string) string {
+func Intopost(infix string) string {
 	//Creates a map with special characters and maps them to ints
 	specials := map[rune]int{'*': 10, '.': 9, '|': 8}
 
@@ -58,21 +54,9 @@ func intopost(infix string) string {
 	return string(pofix)
 } //intopost
 
-func main() {
-	//Answer: ab.c*.
-	fmt.Println("Infix:  ", "a.b.c*")
-	fmt.Println("Postfix: ", intopost("a.b.c*"))
-
-	//Answer: abd|.*
-	fmt.Println("Infix:  ", "(a.(b|d))*")
-	fmt.Println("Postfix: ", intopost("(a.(b|d))*"))
-
-	//Answer: abd|.c*.
-	fmt.Println("Infix:  ", "a.(b|d).c*")
-	fmt.Println("Postfix: ", intopost("a.(b|d).c*"))
-
-	//Answer: abb.+.c.
-	fmt.Println("Infix:  ", "a.(b.b)+.c")
-	fmt.Println("Postfix: ", intopost("a.(b.b)+.c"))
-
-} //main
+func TrimEndString(s string) string {
+	if len(s) > 0 {
+		s = s[:len(s)-2]
+	}
+	return s
+}
