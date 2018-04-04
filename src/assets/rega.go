@@ -1,6 +1,6 @@
 //Author: Conor Raftery
 //Adapted from: https://web.microsoftstream.com/video/68a288f5-4688-4b3a-980e-1fcd5dd2a53b
-//Adapted from: https://web.microsoftstream.com/video/68a288f5-4688-4b3a-980e-1fcd5dd2a53b
+//Adapted from: https://web.microsoftstream.com/video/bad665ee-3417-4350-9d31-6db35cf5f80d
 
 package assets
 
@@ -66,6 +66,15 @@ func Poregtonfa(pofix string) *nfa {
 			frag.accept.edge1 = &initial
 
 			nfastack = append(nfastack, &nfa{initial: frag.initial, accept: &accept})
+
+		case '?':
+			frag := nfastack[len(nfastack)-1]
+
+			initial := state{edge1: frag.initial, edge2: frag.accept}
+
+			frag.accept.edge1 = &initial
+
+			nfastack = append(nfastack, &nfa{initial: &initial, accept: frag.accept})
 
 		default:
 			accept := state{}

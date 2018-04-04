@@ -5,7 +5,7 @@ package assets
 
 func Intopost(infix string) string {
 	//Creates a map with special characters and maps them to ints
-	specials := map[rune]int{'*': 10, '.': 9, '|': 8}
+	specials := map[rune]int{'*': 10, '.': 9, '|': 8, '?': 7, '+': 6}
 
 	//Arrray of runes, initializes an array of empty runes
 	pofix := []rune{} //rune-character on the screen diplayed in UTF-8
@@ -54,6 +54,7 @@ func Intopost(infix string) string {
 	return string(pofix)
 } //intopost
 
+// Remove ending of string
 func TrimEndString(s string) string {
 	if len(s) > 0 {
 		s = s[:len(s)-2]
