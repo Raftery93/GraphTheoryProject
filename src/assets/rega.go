@@ -1,6 +1,7 @@
 //Author: Conor Raftery
 //Adapted from: https://web.microsoftstream.com/video/68a288f5-4688-4b3a-980e-1fcd5dd2a53b
 //Adapted from: https://web.microsoftstream.com/video/bad665ee-3417-4350-9d31-6db35cf5f80d
+//Adapted from: https://www.cs.york.ac.uk/fp/lsa/lectures/REToC.pdf
 
 package assets
 
@@ -117,6 +118,11 @@ func Poregtonfa(pofix string) *nfa {
 			frag := nfastack[len(nfastack)-1]
 
 			initial := state{edge1: frag.initial, edge2: frag.accept}
+
+			//
+			accept := state{edge1: frag.initial, edge2: frag.accept}
+			frag.accept.edge1 = &accept
+			//
 
 			//The fragment edge has to point at the initial state
 			frag.accept.edge1 = &initial
