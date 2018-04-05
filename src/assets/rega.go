@@ -100,6 +100,7 @@ func Poregtonfa(pofix string) *nfa {
 		case '+':
 			//Pop 1 fragment of nfastack (Kleene star only works on one fragment of the nfa)
 			frag := nfastack[len(nfastack)-1]
+			nfastack = nfastack[:len(nfastack)-1] //Not sure should this be used
 
 			//create a normal new state
 			accept := state{}
@@ -120,8 +121,8 @@ func Poregtonfa(pofix string) *nfa {
 			initial := state{edge1: frag.initial, edge2: frag.accept}
 
 			//
-			accept := state{edge1: frag.initial, edge2: frag.accept}
-			frag.accept.edge1 = &accept
+			//accept := state{edge1: frag.initial, edge2: frag.accept}
+			//frag.accept.edge1 = &accept
 			//
 
 			//The fragment edge has to point at the initial state

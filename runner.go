@@ -20,10 +20,14 @@ func main() {
 	for exit {
 
 		//Initial selection
-		fmt.Print("\nPlease select an option:\n1)Infix Expression to Postfix Expresssion\n2)Postix Regular Expresssion to NFA\n3)Exit\n")
+		fmt.Print("\nPlease select an option:\n" +
+			"1)Infix Expression to Postfix Expresssion\n" +
+			"2)Postix Regular Expresssion to NFA\n" +
+			"3)Check does a string matches a regular expression\n" +
+			"4)Exit\n")
 		fmt.Scanln(&option)
 
-		//Enter inifix to postfix
+		//Enter infix to postfix
 		if option == 1 {
 			fmt.Print("Please enter the expression to be converted:")
 			//Read in string and use created function to trim string
@@ -73,14 +77,44 @@ func main() {
 
 				//If returns false, strings do not match
 			} else if assets.Pomatch(expression, regString) == false {
-				fmt.Print("String does not match")
+				fmt.Print("\nString does not match\n")
 				//Catch any errors
 			} else {
-				fmt.Print("An error occured")
+				fmt.Print("\nAn error occured\n")
+			}
+
+		} else if option == 3 {
+
+			//Prompt for basic string
+			fmt.Print("Please enter a regular string to be checked:")
+			////Read in string and use created function to trim string
+			reader := bufio.NewReader(os.Stdin)
+			regString, _ := reader.ReadString('\n')
+			regString = assets.TrimEndString(regString)
+
+			fmt.Print("Please enter the regular expression:")
+			//Read in string and use created function to trim string
+			expression, _ := reader.ReadString('\n')
+			expression = assets.TrimEndString(expression)
+
+			//Pass expression into Intopost function and output result
+			postfixEx := assets.Intopost(expression)
+
+			//If returns true, strings match
+			if assets.Pomatch(postfixEx, regString) == true {
+				//Output result
+				fmt.Println("\nRegular string, ", regString, " matches the expression: ", expression)
+
+				//If returns false, strings do not match
+			} else if assets.Pomatch(postfixEx, regString) == false {
+				fmt.Print("\nString does not match\n")
+				//Catch any errors
+			} else {
+				fmt.Print("\nAn error occured\n")
 			}
 
 			//Exit program
-		} else if option == 3 {
+		} else if option == 4 {
 			fmt.Print("\nProgram Exited\n")
 			//Stop loop
 			exit = false
