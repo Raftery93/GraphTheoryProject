@@ -54,9 +54,12 @@ func Intopost(infix string) string {
 	return string(pofix)
 } //intopost
 
-// Remove ending of string
+// Remove ending of string, user input adds a carriage return and a line feed
+// to each string, so these characters needs to be trimmed back
 func TrimEndString(s string) string {
+	//Make sure string is not blank
 	if len(s) > 0 {
+		//Puts everything except the last 2 items (ASCII 12 & ASCII 10) into 's'
 		s = s[:len(s)-2]
 	}
 	return s
