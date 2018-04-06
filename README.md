@@ -17,6 +17,23 @@ A regular expression is a string containing a series of characters, some of whic
 For example, this program can determine between characters ".", "|", "*", "+" and "?" which have the special meanings
 "concatenate", "or", "Kleene star", "match-one-or-more quantifier" and "match-zero-or-one quantifier" respectively.
 
+
+## Project Plan / Project Development
+I began my project plan by sitting down and writing out a development process via an algorithm. This gave me an initial framework to work on top of. My algorithm included building a runner/main, which the user would launch, and this would be contained within a loop so the user does not have to constantly run the program. This main would be backed by a couple of classes which would do the most of the calculations and functions.
+
+This led me to actually creating the assets I needed for the program to process regular expressions. I used the video tutorials to build these classes, which I later edited to add in extra commands and functions. See the bottom of this readme for references. Once I had these classes finished, I had to 'hook' them up to the main page.
+
+After this, I had a somewhat functioning program with multiple bugs. I created a list of these bugs and I assigned them a priority. For example, one of the high priority bugs was that the user input was being taken in wrong, thus I created a seperate function to resolve this issue. One of the low priority bugs was displaying the details and information to the user in a user friendly fashion.
+
+## Research
+When I began this project, I started by looking into [GoLangs Regexp documentation](https://golang.org/pkg/regexp/). This gave me a better understanding on what a regular expression actually is, and how it is implemented. A regular expression is a sequence of symbols and characters expressing a string or pattern to be searched for within a longer piece of text. This led me to researching how to transform a regular expression into an [NFA](http://infolab.stanford.edu/~ullman/ialc/spr10/slides/fa3.pdf).
+
+Once I got a solid grasp on what a regular expression is, and how to transform it into an NFA, I looked at how to write a program that can process a string through a regular expression function, and how to determine if the string matches. I found an extremely useful paper on this: [Regular Expression Matching](https://swtch.com/~rsc/regexp/regexp1.html). I also used video references which are held below under references.
+
+My final embarkment was how do I transform a regular expression into an NFA. I used one of the video references below for this, along with [Thompsons Construction](https://www.cs.york.ac.uk/fp/lsa/lectures/REToC.pdf).
+
+
+
 ## Testing the Program
 Infix to Postfix:
 
